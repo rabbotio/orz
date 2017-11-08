@@ -6,15 +6,31 @@ describe('authenticate()', () => {
     await nap.start(require('../config'))
 
     const { base_url } = require('../config')
-    const result = await fetch(base_url, {
-      method: 'POST',
-      headers: {
-        authorization: 'Bearer foobar'
-      }
+    const authorize_url = `${base_url}/oauth/authorize`
+
+    const query = require('qs').stringify({
+      redirect_uri: base_url,
+      response_type: 'code',
+      client_id: 1,
+      scope: 'profile'
     })
 
-    const text = await result.text()
-    expect(text).toEqual('Secret area')
+    console.log(`${authorize_url}/?${query}`)
+
+    const result = await fetch(`${authorize_url}/?${query}`)
+
+    const json = await result.json()
+    console.log(json)
+
+    expect(json).toMatchObject({
+      redirectUri: expect.any(String), // expect.stringMatching(new RegExp(String.raw`http://localhost:3030/?scope=profile&expires_in=3600&code=\s`)),
+      state: {
+        redirect_uri: 'http://localhost:3030',
+        response_type: 'code',
+        client_id: '1',
+        scope: ['profile']
+      }
+    })
 
     await nap.stop()
   })

@@ -10,7 +10,7 @@ module.exports = {
     mongoose = await require('./model')(config).catch(err => debug.error(`MongoDB :`, err))
 
     // OAuth
-    await require('./oauth')(app, config)
+    await require('./oauth').init(app, config)
 
     // Server
     server = await require('./express/server')(app, config)

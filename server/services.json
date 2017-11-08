@@ -1,0 +1,14 @@
+{
+  "services": [
+    {
+      "name": "comment",
+      "url": "https://comment.jamplay.world/",
+      "env": "local"
+    },
+    {
+      "name": "comment",
+      "url": "https://comment.jamplay.world/",
+      "env": "staging"
+    }
+  ]
+}

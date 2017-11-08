@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start-dev": "nodemon index.js",
+    "test": "jest",
     "test-watch": "jest --watchAll"
   },
   "dependencies": {

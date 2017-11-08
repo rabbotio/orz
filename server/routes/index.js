@@ -2,7 +2,7 @@ const initRoute = app => {
   // TODO
 }
 
-const init = ({ base_url }, app) => {
+const init = (app, { base_url }) => {
   // Route
   initRoute(app)
 }

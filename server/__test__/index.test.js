@@ -44,13 +44,13 @@ describe('authenticate()', () => {
       client_secret: 'kittens',
       code: json.redirectUri.split('&code=')[1]
     })
-    console.log(`${oauth_token_url}?${queryToken}`)
+
     const token_result = await fetch(`${oauth_token_url}?${queryToken}`)
     const token_json = await token_result.json()
 
     expect(token_json).toMatchObject({
       token_type: 'Bearer',
-      expires_in: expect.any(Number),
+      expires_in: expect.any(String),
       access_token: expect.any(String),
       refresh_token: expect.any(String)
     })

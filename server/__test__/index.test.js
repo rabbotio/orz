@@ -3,9 +3,9 @@ require('../pre')
 describe('authenticate()', () => {
   it('should authenticate the request', async () => {
     const nap = require('../nap')
-    await nap.start(require('../config'))
+    await nap.start(require('./config'))
 
-    const { base_url } = require('../config')
+    const { base_url } = require('./config')
     const authorize_url = `${base_url}/oauth/authorize`
 
     const query = require('qs').stringify({
@@ -23,7 +23,7 @@ describe('authenticate()', () => {
     console.log(json)
 
     expect(json).toMatchObject({
-      redirectUri: expect.any(String), // expect.stringMatching(new RegExp(String.raw`http://localhost:3030/?scope=profile&expires_in=3600&code=\s`)),
+      redirectUri: expect.stringMatching(new RegExp(String.raw`http:\/\/localhost:3030\/\?scope=profile&expires_in=3600&code=`)),
       state: {
         redirect_uri: 'http://localhost:3030',
         response_type: 'code',

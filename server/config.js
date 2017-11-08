@@ -7,7 +7,7 @@ const config = {
   },
   secret: process.env.SECRET,
   mongodb_uri: process.env.MONGODB_URI || 'mongodb://mongo/graphql',
-  base_url: process.env.BASE_URL || 'http://localhost:3000'
+  base_url: process.env.BASE_URL || 'http://localhost:3030'
 }
 
 module.exports = config

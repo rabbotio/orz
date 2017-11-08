@@ -12,11 +12,11 @@ module.exports = {
     // OAuth
     await require('./oauth')(app, config)
 
-    // Route
-    // await require('./routes')(app, config)
-
     // Server
     server = await require('./express/server')(app, config)
+
+    // Route
+    require('./routes')(app, config)
 
     // Ready
     const { version } = require('./package.json')

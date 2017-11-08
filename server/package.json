@@ -16,7 +16,9 @@
     "express-oauth-server": "^2.0.0",
     "helmet": "^3.9.0",
     "isomorphic-fetch": "^2.2.1",
-    "mongoose": "^4.13.0"
+    "kgo": "^4.0.3",
+    "mongoose": "^4.13.0",
+    "node-uuid": "^1.4.8"
   },
   "devDependencies": {
     "jest": "^21.2.1",

@@ -19,11 +19,12 @@ const init = (app, { secret }) =>
       continueMiddleware: true
     })
 
+    /*
     app.use(app.oauth.authenticate())
 
     app.use((req, res) => {
       res.send('Secret area')
-    })
+    }) */
 
     return resolve(app)
   })

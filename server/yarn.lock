@@ -646,6 +646,10 @@ cors@^2.8.4:
     object-assign "^4"
     vary "^1"
 
+cpsenize@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cpsenize/-/cpsenize-1.0.0.tgz#76e0352120726aaf5aa9160a4baee5e6727de0d3"
+
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
@@ -1938,6 +1942,12 @@ kareem@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
 
+kgo@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/kgo/-/kgo-4.0.3.tgz#1c575f203b320ecdbcc9bdb49bc5ec874a6b35b6"
+  dependencies:
+    cpsenize "^1.0.0"
+
 kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -2309,6 +2319,10 @@ node-pre-gyp@^0.6.36:
     semver "^5.3.0"
     tar "^2.2.1"
     tar-pack "^3.4.0"
+
+node-uuid@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
 nodemon@^1.12.1:
   version "1.12.1"

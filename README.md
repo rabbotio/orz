@@ -1,9 +1,9 @@
-# nap-god
+# osmos
 An admin panel for NAP
 
 # Use
-- Run `nap`
-- Add `nap` endpoint to `.env`
+- Run `osmos`
+- Add `osmos` endpoint to `.env`
 
 # TODO
 - [x] it should separated by services 
@@ -12,7 +12,7 @@ An admin panel for NAP
 - [ ] it should generate `client_secret`
 - [ ] it should generate `access_token` that contain `exp`, `client_id`
 
-# nap-provider
+# osmos-provider
 - [ ] it can verify `access_token` by `client_secret`
 - [ ] it should provide `getUserNames` if `access_token` is provide.
 - [ ] it should back off wrong request.

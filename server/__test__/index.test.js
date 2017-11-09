@@ -6,8 +6,8 @@ describe('authenticate()', () => {
     const qs = require('qs')
 
     // Server
-    const nap = require('../nap')
-    await nap.start(require('./config'))
+    const osmos = require('../osmos')
+    await osmos.start(require('./config'))
 
     // Config
     const { base_url } = require('./config')
@@ -64,6 +64,6 @@ describe('authenticate()', () => {
       isValid: true
     })
 
-    await nap.stop()
+    await osmos.stop()
   })
 })

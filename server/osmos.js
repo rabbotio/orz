@@ -20,7 +20,7 @@ module.exports = {
 
     // Ready
     const { version } = require('./package.json')
-    debug.info(`NAP     : v${version} (${process.env.NODE_ENV}) is ready, enjoy! 🚀`) // eslint-disable-line
+    debug.info(`OSMOS   : v${version} (${process.env.NODE_ENV}) is ready, enjoy! 🚀`) // eslint-disable-line
     return true
   },
   stop: async () => {
@@ -28,7 +28,7 @@ module.exports = {
     debug.info(`MongoDB : bye!`)
 
     await server.close()
-    debug.info(`NAP     : bye!`)
+    debug.info(`OSMOS   : bye!`)
 
     return true
   }

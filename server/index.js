@@ -1,2 +1,2 @@
 require('./pre')
-require('./nap').start(require('./config'))
+require('./osmos').start(require('./config'))

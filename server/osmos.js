@@ -18,6 +18,9 @@ module.exports = {
     // Route
     require('./routes')(app, config)
 
+    // Broker
+    require('./broker')(app, config)
+
     // Ready
     const { version } = require('./package.json')
     debug.info(`OSMOS   : v${version} (${process.env.NODE_ENV}) is ready, enjoy! 🚀`) // eslint-disable-line

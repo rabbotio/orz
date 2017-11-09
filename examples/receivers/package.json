@@ -1,0 +1,16 @@
+{
+  "name": "receivers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "katopz",
+  "license": "MIT",
+  "dependencies": {
+    "mqtt": "^2.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}

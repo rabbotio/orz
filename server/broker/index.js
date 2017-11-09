@@ -1,25 +1,18 @@
 module.exports = (app, config) => {
-  const mosca = require('mosca')
+  const aedes = require('aedes')()
+  const server = require('net').createServer(aedes.handle)
+  const port = 1883
 
-  const settings = {
-    port: 1883,
-    backend: {
-      // using ascoltatore
-      type: 'mongo',
-      url: 'mongodb://localhost:27017/mqtt',
-      pubsubCollection: 'ascoltatori',
-      mongo: {}
-    }
-  }
+  server.listen(port, () => {
+    console.log('server listening on port', port)
+  })
 
-  const server = new mosca.Server(settings)
-
-  require('./sniff')(server)
+  require('./sniff')(aedes)
 
   server.on('ready', () => {
     require('./authen')(server)
     require('./authorize')(server)
 
-    debug.info(`Mosca   : ${settings.backend.pubsubCollection}:${settings.port} -> ${settings.backend.url}`)
+    debug.info(`Aedes   : Ready!`)
   })
 }

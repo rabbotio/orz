@@ -8,20 +8,22 @@ const echo = (client, { roomID, userID, msg }) => {
 // Setup
 const mqtt = require('mqtt')
 const client = mqtt.connect('mqtt://localhost')
+let _index
 
 // Connect
 client.on('connect', () => {
   // Yeah!
-  console.log('connected')
+  console.log('comment.connected')
 
-  // Will comments every 1 sec
-  setInterval(
+  // Will comments every 3 sec
+  _index && clearInterval(_index)
+  _index = setInterval(
     () =>
       echo(client, {
-        roomID: 'some room',
+        roomID: 'some_room_id',
         userID: '59f0579537d658654f0334f5',
         msg: 'Hello! :D'
       }),
-    1000
+    3000
   )
 })

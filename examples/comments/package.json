@@ -5,6 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
+    "amqplib": "^0.5.1",
     "mqtt": "^2.14.0"
   },
   "devDependencies": {

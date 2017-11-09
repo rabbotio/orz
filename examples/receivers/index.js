@@ -5,7 +5,7 @@ const client = mqtt.connect('mqtt://localhost')
 // Connect
 client.on('connect', () => {
   // Yeah!
-  console.log('connected')
+  console.log('receivers.connected')
 
   // Listen
   client.subscribe('notification')

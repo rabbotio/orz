@@ -55,6 +55,15 @@ describe('authenticate()', () => {
       refresh_token: expect.any(String)
     })
 
+    // #3 : token -> validate
+    const api_test_url = `${base_url}/api/test/`
+    const api_test_result = await fetch(`${api_test_url}`, { headers: { authorization: `Bearer ${token_json.access_token}` } })
+    const api_test_json = await api_test_result.json()
+
+    expect(api_test_json).toMatchObject({
+      isValid: true
+    })
+
     await nap.stop()
   })
 })

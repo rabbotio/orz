@@ -1,6 +1,6 @@
-# osmos
-- Dashboard for Micro-services
-- MOSCA MQTT Broker
+# orz
+- RabbitMQ Broker
+- RabbitMQ RPC
 
 ## Examples
 ```
@@ -11,8 +11,8 @@ cd examples/receivers && yarn install && yarn start
 ```
 
 ## Use
-- Run `osmos`
-- Add `osmos` endpoint to `.env`
+- Run `orz`
+- Add `orz` endpoint to `.env`
 
 ## TODO
 - [x] it should separated by services 
@@ -25,7 +25,7 @@ cd examples/receivers && yarn install && yarn start
 - [ ] Apply scope to Mosca user
 - [ ] Add Mosca user by service
 
-## osmos-provider
+## orz-provider
 - [ ] it can verify `access_token` by `client_secret`
 - [ ] it should provide `getUserNames` if `access_token` is provide.
 - [ ] it should back off wrong request.

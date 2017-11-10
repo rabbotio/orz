@@ -1,2 +1,2 @@
 require('./pre')
-require('./osmos').start(require('./config'))
+require('./orz').start(require('./config'))

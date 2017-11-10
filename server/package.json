@@ -5,12 +5,14 @@
   "author": "katopz",
   "license": "MIT",
   "scripts": {
+    "rabbitmq": "docker run -p 4369:4369 -p 5672:5672 -p 25672:25672 -d --hostname rabbitmq --name rabbitmq rabbitmq",
     "start": "nodemon index.js",
     "test": "jest",
     "test-watch": "jest --watchAll"
   },
   "dependencies": {
     "aedes": "^0.30.1",
+    "amqplib": "^0.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",

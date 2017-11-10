@@ -1,0 +1,16 @@
+{
+  "name": "rpc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "katopz",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.5.1"
+  },
+  "scripts": {
+    "start": "nodemon index.js 2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}

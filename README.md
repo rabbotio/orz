@@ -1,6 +1,5 @@
 # orz
-- RabbitMQ Broker
-- RabbitMQ RPC
+- Oauth Router on ZeroMQ
 
 ## Examples
 ```

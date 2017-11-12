@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
-    "amqplib": "^0.5.1"
+    "zerorpc": "^0.9.7"
   },
   "scripts": {
     "start": "nodemon index.js 2"

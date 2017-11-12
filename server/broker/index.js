@@ -1,35 +1,29 @@
 module.exports = (app, config) => {
-  var amqp = require('amqplib/callback_api')
+  const zerorpc = require('zerorpc')
 
-  amqp.connect('amqp://localhost:5672', (err, conn) => {
-    if (err) throw err
+  const server = new zerorpc.Server({
+    addMan: function (sentence, reply) {
+      reply(null, sentence + ', man!')
+    },
 
-    conn.createChannel((err, ch) => {
-      if (err) throw err
+    add42: function (n, reply) {
+      reply(null, n + 42)
+    },
 
-      var q = 'rpc_queue'
+    iter: function (from, to, step, reply) {
+      for (let i = from; i < to; i += step) {
+        reply(null, i, true)
+      }
 
-      ch.assertQueue(q, { durable: false })
-      ch.prefetch(1)
-      console.log(' [x] Awaiting RPC requests')
-      ch.consume(q, function reply (msg) {
-        var n = parseInt(msg.content.toString())
-
-        console.log(' [.] fib(%d)', n)
-
-        var r = fibonacci(n)
-
-        ch.sendToQueue(msg.properties.replyTo, Buffer.from(r.toString()), { correlationId: msg.properties.correlationId })
-
-        ch.ack(msg)
-      })
-    })
+      reply()
+    }
   })
 
-  function fibonacci (n) {
-    if (n === 0 || n === 1) return n
-    else return fibonacci(n - 1) + fibonacci(n - 2)
-  }
+  server.bind('tcp://0.0.0.0:4242')
+
+  server.on('error', error => {
+    console.error('RPC server error:', error)
+  })
 
   /*
   require('./sniff')(aedes)

@@ -9,6 +9,12 @@ cd examples/notifications && yarn install && yarn start
 cd examples/receivers && yarn install && yarn start
 ```
 
+## Setup
+```
+# For develop on macOS
+brew install zeromq
+```
+
 ## Use
 - Run `orz`
 - Add `orz` endpoint to `.env`

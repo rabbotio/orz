@@ -5,6 +5,7 @@ server.start(schema, 4001)
 
 // Provide RPC service
 const config = {
+  service: 'comments',
   broker: {
     host: 'tcp://127.0.0.1:55555'
   }
@@ -20,14 +21,16 @@ client.on('error', function (err) {
   console.log('CLIENT ERROR', err)
 })
 
-// Streaming implementation
+const query = `{
+  getFoo(bar:"ok") 
+}`
+
 setTimeout(() => {
   console.log('request.start')
   const res = client.request(
-    'stock',
+    config.service,
     {
-      foo: 'bar',
-      baz: 1979
+      query
     },
     { timeout: 90000 }
   )

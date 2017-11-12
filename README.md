@@ -2,6 +2,7 @@
 - Oauth Router on ZeroMQ
 - Support RPC
 - Support GraphQL+RPC
+- Support service discovery
 - Support Authentication https://github.com/msealand/zmq-zap.node
 - Support Authorization
 - Support REST+RPC

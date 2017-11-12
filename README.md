@@ -1,5 +1,15 @@
 # orz
 - Oauth Router on ZeroMQ
+- Support RPC
+- Support GraphQL+RPC
+- Support Authentication https://github.com/msealand/zmq-zap.node
+- Support Authorization
+- Support REST+RPC
+
+## Use case
+```
+Content ---[query/mutation]---> Broker ---> Worker
+```
 
 ## Examples
 ```

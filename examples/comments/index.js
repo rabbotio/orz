@@ -1,29 +1,44 @@
-// Sender
-const echo = (client, { roomID, userID, msg }) => {
-  const payload = `${+new Date()}/${roomID}/${userID}/${msg}`
-  console.log('echo:', payload)
-  client.publish('comment', payload)
+// Provide GraphQL server
+const server = require('./lib/server.js')
+const schema = require('./schemas')
+server.start(schema, 4001)
+
+// Provide RPC service
+const config = {
+  broker: {
+    host: 'tcp://127.0.0.1:55555'
+  }
 }
+require('./lib/orz.worker').Worker(config)
 
-// Setup
-const mqtt = require('mqtt')
-const client = mqtt.connect('mqtt://localhost')
-let _index
+// test
+const { Client } = require('pigato')
+const client = new Client(config.broker.host)
+client.start()
 
-// Connect
-client.on('connect', () => {
-  // Yeah!
-  console.log('comment.connected')
-
-  // Will comments every 3 sec
-  _index && clearInterval(_index)
-  _index = setInterval(
-    () =>
-      echo(client, {
-        roomID: 'some_room_id',
-        userID: '59f0579537d658654f0334f5',
-        msg: 'Hello! :D'
-      }),
-    3000
-  )
+client.on('error', function (err) {
+  console.log('CLIENT ERROR', err)
 })
+
+// Streaming implementation
+setTimeout(() => {
+  console.log('request.start')
+  const res = client.request(
+    'stock',
+    {
+      foo: 'bar',
+      baz: 1979
+    },
+    { timeout: 90000 }
+  )
+
+  let body = ''
+  res
+    .on('data', data => {
+      body += data
+      console.log(data)
+    })
+    .on('end', () => {
+      console.log('request.end')
+    })
+}, 3000)

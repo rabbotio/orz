@@ -8,8 +8,9 @@ const Worker = conf => {
   })
 
   worker.on('request', (inp, rep) => {
+    console.log('worker.inp:', inp)
     rep.write(JSON.stringify(inp))
-    rep.end('')
+    rep.end()
   })
 }
 

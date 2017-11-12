@@ -36,7 +36,7 @@ setTimeout(() => {
   res
     .on('data', data => {
       body += data
-      console.log(data)
+      console.log('client.data:', data)
     })
     .on('end', () => {
       console.log('request.end')

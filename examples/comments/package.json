@@ -16,9 +16,11 @@
     "pigato": "0.0.46"
   },
   "devDependencies": {
+    "jest": "^21.2.1",
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "node index.js &&"
   }
 }

@@ -1,5 +1,5 @@
 module.exports = (app, config) => {
-  var Broker = require('pigato').Broker
+  var { Broker } = require('pigato')
   var conf = {
     broker: {
       host: 'tcp://127.0.0.1:55555'

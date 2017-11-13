@@ -1,5 +1,5 @@
 class Worker {
-  constructor ({ host, service, graphqlURI: uri, logger = console }) {
+  constructor ({ brokerURI: host, service, graphqlURI: uri, logger = console }) {
     // Logger
     this.logger = logger
 

@@ -1,5 +1,5 @@
 class Client {
-  constructor ({ host, service, logger = console }) {
+  constructor ({ brokerURI: host, service, logger = console }) {
     // Logger
     this.logger = logger
 

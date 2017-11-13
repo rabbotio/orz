@@ -1,27 +1,28 @@
 class Client {
-  constructor ({ host, service, logger = null }) {
-    const { Client } = require('pigato')
+  constructor ({ host, service, logger = console }) {
+    // Logger
+    this.logger = logger
+
+    // Service
     this.service = service
-    this.client = new Client(host)
-    this.client.on('error', console.error)
+
+    // Client
+    const { Client: PigatoClient } = require('pigato')
+    this.client = new PigatoClient(host)
+
+    // Capture error
+    this.client.on('error', this.logger.error)
   }
 
   start () {
     this.client.start()
   }
 
-  fetch ({ query }) {
-    return new Promise((resolve, reject) => {
-      this.client.on('error', err => {
-        console.log('CLIENT ERROR', err)
-        reject(err)
-      })
-
-      const res = this.client.request(
+  fetch (props) {
+    return new Promise((resolve, reject) =>
+      this.client.request(
         this.service,
-        {
-          query
-        },
+        props, // Pass through props = { query, variables, operationName }
         null, // Partial data from rep.write not handle
         (err, data) => {
           if (err) reject(err)
@@ -31,7 +32,7 @@ class Client {
           timeout: 5000
         }
       )
-    })
+    )
   }
 }
 

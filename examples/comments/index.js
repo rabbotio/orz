@@ -6,12 +6,17 @@ server.start(schema, 4001)
 // Provide RPC service
 const config = {
   service: 'comments',
+  graphqlURI: `http://localhost:4001/graphql`,
   broker: {
     host: 'tcp://127.0.0.1:55555'
   }
 }
 const Worker = require('./lib/orz.worker')
-const worker = new Worker({ host: config.broker.host, service: config.service })
+const worker = new Worker({
+  host: config.broker.host,
+  service: config.service,
+  graphqlURI: config.graphqlURI
+})
 worker.start()
 
 // Test call

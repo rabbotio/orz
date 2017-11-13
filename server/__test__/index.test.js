@@ -10,11 +10,11 @@ describe('authenticate()', () => {
     await orz.start(require('./config'))
 
     // Config
-    const { base_url } = require('./config')
-    const oauth_authorize_url = `${base_url}/oauth/authorize/`
+    const { baseURL } = require('./config')
+    const oauth_authorize_url = `${baseURL}/oauth/authorize/`
 
     const queryCode = qs.stringify({
-      redirect_uri: base_url,
+      redirect_uri: baseURL,
       response_type: 'code',
       client_id: 1,
       scope: 'profile'
@@ -36,7 +36,7 @@ describe('authenticate()', () => {
     })
 
     // #2 : code -> token
-    const oauth_token_url = `${base_url}/oauth/token/`
+    const oauth_token_url = `${baseURL}/oauth/token/`
 
     const queryToken = qs.stringify({
       grant_type: 'authorization_code',
@@ -56,7 +56,7 @@ describe('authenticate()', () => {
     })
 
     // #3 : token -> validate
-    const api_test_url = `${base_url}/api/test/`
+    const api_test_url = `${baseURL}/api/test/`
     const api_test_result = await fetch(`${api_test_url}`, { headers: { authorization: `Bearer ${token_json.access_token}` } })
     const api_test_json = await api_test_result.json()
 

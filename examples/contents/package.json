@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
-    "mqtt": "^2.14.0"
+    "@rabbotio/rainbow": "^1.0.7"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

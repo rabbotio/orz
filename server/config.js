@@ -6,8 +6,9 @@ const config = {
     return process.env.NODE_ENV === 'production'
   },
   secret: process.env.SECRET,
-  mongodb_uri: process.env.MONGODB_URI || 'mongodb://mongo/graphql',
-  base_url: process.env.BASE_URL || 'http://localhost:3030'
+  mongodbURI: process.env.MONGODB_URI || 'mongodb://mongo/graphql',
+  baseURL: process.env.BASE_URL || 'http://localhost:3030',
+  brokerURI: process.env.BROKER_URI || 'tcp://127.0.0.1:55555'
 }
 
 module.exports = config

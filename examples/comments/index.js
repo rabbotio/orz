@@ -1,16 +1,20 @@
 const start = async () => {
-  // Provide GraphQL server
-  const server = require('./lib/server.js')
-  const schema = require('./schemas')
-  await server.start(schema, 4001)
-
-  // Provide RPC service
-  const Worker = require('./lib/orz.worker')
-  const worker = new Worker({
+  // Config
+  const config = {
     service: 'comments',
     graphqlURI: 'http://localhost:4001/graphql',
     brokerURI: 'tcp://127.0.0.1:55555'
-  })
+  }
+
+  // GraphQL server
+  const { Server } = require('@rabbotio/rainbow')
+  const schema = require('./schemas')
+  const server = new Server({ schema, port: 4001 })
+  await server.start()
+
+  // Worker
+  const { Worker } = require('@rabbotio/rainbow')
+  const worker = new Worker(config)
   worker.start()
 }
 

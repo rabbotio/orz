@@ -1,4 +1,4 @@
-module.exports = (app, { base_url }) =>
+module.exports = (app, { baseURL }) =>
   new Promise((resolve, reject) => {
     // Graceful Shutdown Server
     const gracefulShutdown = (server, signal) => {
@@ -11,10 +11,10 @@ module.exports = (app, { base_url }) =>
 
     // Server
     const { URL } = require('url')
-    const port = new URL(base_url).port
+    const port = new URL(baseURL).port
     const server = app.listen(port, err => {
       if (err) return reject(err)
-      debug.info(`Express : ${base_url}`)
+      debug.info(`Express : ${baseURL}`)
       resolve(server)
     })
 

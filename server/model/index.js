@@ -1,5 +1,5 @@
-const init = async ({ mongodb_uri }) => {
-  debug.info(`MongoDB : ${mongodb_uri}`)
+const init = async ({ mongodbURI }) => {
+  debug.info(`MongoDB : ${mongodbURI}`)
 
   const mongoose = require('mongoose')
   mongoose.Promise = global.Promise
@@ -11,7 +11,7 @@ const init = async ({ mongodb_uri }) => {
   mongoose.connection.on('close', () => debug.info(`MongoDB :`, 'Connection Closed'))
   mongoose.connection.on('error', err => debug.error(`MongoDB :`, err))
 
-  await mongoose.connect(mongodb_uri, {
+  await mongoose.connect(mongodbURI, {
     useMongoClient: true,
     autoReconnect: true,
     reconnectTries: Number.MAX_VALUE,

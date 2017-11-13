@@ -1,10 +1,10 @@
 module.exports = `
 type Query {
-  getComments: String
+  getNotifications: String
 }
 
 type Mutation {
-  setComment(value: String!): String
+  setNotification(value: String!): String
 }
 
 schema {

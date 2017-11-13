@@ -1,10 +1,10 @@
 module.exports = `
 type Query {
-  getComments: String
+  getAchievements: String
 }
 
 type Mutation {
-  setComment(value: String!): String
+  setAchievement(value: String!): String
 }
 
 schema {

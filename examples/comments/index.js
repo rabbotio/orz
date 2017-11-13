@@ -2,13 +2,6 @@ const brokerURI = 'tcp://127.0.0.1:55555'
 
 // Our service
 const start = async () => {
-  // Config
-  const config = {
-    service: 'comments',
-    graphqlURI: 'http://localhost:4002/graphql',
-    brokerURI
-  }
-
   // GraphQL server
   const { Server } = require('@rabbotio/rainbow')
   const schema = require('./schemas')
@@ -17,49 +10,35 @@ const start = async () => {
 
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
-  const worker = new Worker(config)
+  const worker = new Worker({
+    service: 'comments',
+    graphqlURI: 'http://localhost:4002/graphql',
+    brokerURI
+  })
   worker.start()
 }
 
+const { fetchOnce } = require('@rabbotio/rainbow')
+
 // Other service
-const setAchievement = async () => {
-  // Client
-  const { Client } = require('@rabbotio/rainbow')
-  const client = new Client({
+const setAchievement = async () =>
+  fetchOnce({
     service: 'achievements',
-    brokerURI
+    brokerURI,
+    query: `mutation { setAchievement(value: "ok") }`
   })
-
-  client.start()
-
-  // Fetch
-  const query = `mutation {
-    setAchievement(value: "ok")
-  }`
-  const result = await client.fetch({ query }).catch(console.error)
-  console.log(result)
-  return result
-}
+    .then(console.log)
+    .catch(console.error)
 
 // And other service
-const setNotification = async () => {
-  // Client
-  const { Client } = require('@rabbotio/rainbow')
-  const client = new Client({
+const setNotification = async () =>
+  fetchOnce({
     service: 'notifications',
-    brokerURI
+    brokerURI,
+    query: `mutation { setNotification(value: "ok") }`
   })
-
-  client.start()
-
-  // Fetch
-  const query = `mutation {
-    setNotification(value: "ok")
-  }`
-  const result = await client.fetch({ query }).catch(console.error)
-  console.log(result)
-  return result
-}
+    .then(console.log)
+    .catch(console.error)
 
 // We'll start our service...
 start()

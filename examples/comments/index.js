@@ -10,38 +10,19 @@ const config = {
     host: 'tcp://127.0.0.1:55555'
   }
 }
-require('./lib/orz.worker').Worker(config)
+const Worker = require('./lib/orz.worker')
+const worker = new Worker({ host: config.broker.host, service: config.service })
+worker.start()
 
-// test
-const { Client } = require('pigato')
-const client = new Client(config.broker.host)
+// Test call
+const Client = require('./lib/orz.client')
+const client = new Client({ host: config.broker.host, service: config.service })
 client.start()
-
-client.on('error', function (err) {
-  console.log('CLIENT ERROR', err)
-})
-
 const query = `{
   getFoo(bar:"ok") 
 }`
 
-setTimeout(() => {
+setInterval(() => {
   console.log('request.start')
-  const res = client.request(
-    config.service,
-    {
-      query
-    },
-    { timeout: 90000 }
-  )
-
-  let body = ''
-  res
-    .on('data', data => {
-      body += data
-      console.log('client.data:', data)
-    })
-    .on('end', () => {
-      console.log('request.end')
-    })
+  client.fetch({ query }).then(console.log).catch(console.error)
 }, 3000)

@@ -1,35 +1,36 @@
-const Worker = config => {
-  // Worker
-  const { Worker } = require('pigato')
-  const worker = new Worker(config.broker.host, config.service)
-  worker.start()
+class Worker {
+  constructor ({ host, service, logger = null }) {
+    // Worker
+    const { Worker: PigatoWorker } = require('pigato')
+    this.worker = new PigatoWorker(host, service)
 
-  worker.on('error', err => {
-    console.log('WORKER ERROR', err)
-  })
+    this.worker.on('error', err => {
+      logger ? logger.error(err) : console.error(err)
+    })
 
-  worker.on('request', (inp, rep) => {
-    console.log('worker.inp:', inp)
+    this.worker.on('request', (inp, rep) => {
+      console.log('worker.inp:', inp)
 
-    // GraphQL
-    const { createApolloFetch } = require('apollo-fetch')
-    const uri = `http://localhost:4001/graphql`
-    const apolloFetch = createApolloFetch({ uri })
+      // GraphQL
+      const { createApolloFetch } = require('apollo-fetch')
+      const uri = `http://localhost:4001/graphql`
+      const apolloFetch = createApolloFetch({ uri })
 
-    const { query, variables, operationName } = inp
-    apolloFetch({ query, variables, operationName })
-      .then(result => {
-        // const { data, errors, extensions } = result
-        rep.write(JSON.stringify(result))
-        rep.end()
-      })
-      .catch(err => {
-        rep.write(JSON.stringify(err))
-        rep.end()
-      })
-  })
+      const { query, variables, operationName } = inp
+      apolloFetch({ query, variables, operationName })
+        .then(result => {
+          // const { data, errors, extensions } = result
+          rep.end(JSON.stringify(result))
+        })
+        .catch(err => {
+          rep.end(JSON.stringify(err))
+        })
+    })
+  }
 
-  return worker
+  start () {
+    this.worker.start()
+  }
 }
 
-module.exports = { Worker }
+module.exports = Worker

@@ -28,6 +28,8 @@ const Worker = config => {
         rep.end()
       })
   })
+
+  return worker
 }
 
 module.exports = { Worker }

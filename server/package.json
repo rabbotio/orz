@@ -11,7 +11,7 @@
     "test-watch": "jest --watchAll"
   },
   "dependencies": {
-    "@rabbotio/rainbow": "^1.2.2",
+    "@rabbotio/rainbow": "^1.3.2",
     "dotenv": "^4.0.0",
     "express-oauth-server": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",

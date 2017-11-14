@@ -7,40 +7,33 @@ const start = async () => {
   // GraphQL server
   const { GraphQLServer } = require('@rabbotio/rainbow')
   const schema = require('./schemas')
-  const graphQLServer = new GraphQLServer({ schema, baseURL })
+  const graphQLServer = new GraphQLServer(baseURL, schema)
   await graphQLServer.start()
 
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
-  const worker = new Worker({
-    service: 'comments',
-    graphqlURI: `${baseURL}/graphql`,
-    brokerURI
-  })
+  const worker = new Worker(brokerURI, 'comments')
+  worker.withGraphQL(`${baseURL}/graphql`)
   await worker.start()
 }
 
-const { fetchOnce } = require('@rabbotio/rainbow')
-
 // Other service
-const setAchievement = async () =>
-  fetchOnce({
-    service: 'achievements',
-    brokerURI,
-    query: `mutation { setAchievement(value: "ok") }`
-  })
-    .then(console.log)
-    .catch(console.error)
+const setAchievement = async () => {
+  const { Client } = require('@rabbotio/rainbow')
+  const client = new Client(brokerURI, 'achievements')
+  await client.start()
+
+  return client.fetch({ query: `mutation { setAchievement(value: "ok") }` }).then(console.log).catch(console.error)
+}
 
 // And other service
-const setNotification = async () =>
-  fetchOnce({
-    service: 'notifications',
-    brokerURI,
-    query: `mutation { setNotification(value: "ok") }`
-  })
-    .then(console.log)
-    .catch(console.error)
+const setNotification = async () => {
+  const { Client } = require('@rabbotio/rainbow')
+  const client = new Client(brokerURI, 'notifications')
+  await client.start()
+
+  return client.fetch({ query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
+}
 
 // We'll start our service...
 start()

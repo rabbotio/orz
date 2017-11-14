@@ -9,21 +9,26 @@ module.exports = {
     // Mongoose
     _mongoose = await require('./model')(config).catch(err => this.logger.error(`MongoDB :`, err))
 
-    // Init
-    _server = await require('./express')(config)
+    // GraphQLServer
+    const { GraphQLServer } = require('@rabbotio/rainbow')
+    const { baseURL, schema } = config
+    _server = new GraphQLServer(baseURL, schema)
     const { app } = _server
+
+    // Broker
+    const { Broker } = require('@rabbotio/rainbow')
+    const { brokerURI } = config
+    const broker = new Broker(brokerURI)
+    broker.start()
+
+    // Route
+    require('./routes')(app, config)
 
     // OAuth
     await require('./oauth').init(app, config)
 
     // Server
     await _server.start()
-
-    // Route
-    require('./routes')(app, config)
-
-    // Broker
-    require('./broker')(app, config)
 
     // Ready
     const { version } = require('./package.json')

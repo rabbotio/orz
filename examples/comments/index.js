@@ -17,7 +17,7 @@ const start = async () => {
     graphqlURI: `${baseURL}/graphql`,
     brokerURI
   })
-  worker.start()
+  await worker.start()
 }
 
 const { fetchOnce } = require('@rabbotio/rainbow')

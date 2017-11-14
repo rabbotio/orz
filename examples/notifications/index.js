@@ -17,7 +17,7 @@ const start = async () => {
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
   const worker = new Worker(config)
-  worker.start()
+  await worker.start()
 }
 
 start()

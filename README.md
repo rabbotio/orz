@@ -7,17 +7,25 @@
 - Support Authorization
 - Support REST+RPC
 
-## Use case
+## Overview
 ```
 Content ---[query/mutation]---> Broker ---> Worker
 ```
 
+## Run
+```
+# Config
+cp .env.example .env
+
+# Start broker
+cd server && yarn install && yarn start
+```
+
 ## Examples
 ```
-cd server && yarn install && yarn start
-cd examples/comments && yarn install && yarn start
+cd examples/achievements && yarn install && yarn start
 cd examples/notifications && yarn install && yarn start
-cd examples/receivers && yarn install && yarn start
+cd examples/comments && yarn install && yarn start
 ```
 
 ## Setup
@@ -25,10 +33,6 @@ cd examples/receivers && yarn install && yarn start
 # For develop on macOS
 brew install zeromq
 ```
-
-## Use
-- Run `orz`
-- Add `orz` endpoint to `.env`
 
 ## TODO
 - [x] it should separated by services 

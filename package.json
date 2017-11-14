@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "update-server": "cd server && ncu -u -a && npm i",
+    "update3": "cd examples/comments && ncu -u -a && npm i",
+    "update2": "cd examples/achievements && ncu -u -a && npm i",
+    "update1": "cd examples/notifications && ncu -u -a && npm i",
+    "update": "npm run update-server && npm run update1 && npm run update2 && npm run update3",
+    "start-server": "cd server && npm start",
+    "start3": "cd examples/comments && npm start",
+    "start2": "cd examples/achievements && npm start",
+    "start1": "cd examples/notifications && npm start"
+  }
+}

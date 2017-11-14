@@ -6,11 +6,12 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon index.js",
+    "mongo": "docker run --name mongo -p 27017:27017 -d mongo:3.4 2>/dev/null || docker start mongo 2>/dev/null && docker ps",
     "test": "jest",
     "test-watch": "jest --watchAll"
   },
   "dependencies": {
-    "@rabbotio/rainbow": "^1.2.0",
+    "@rabbotio/rainbow": "^1.2.2",
     "dotenv": "^4.0.0",
     "express-oauth-server": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",

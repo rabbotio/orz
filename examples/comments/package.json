@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
-    "@rabbotio/rainbow": "^1.1.1",
+    "@rabbotio/rainbow": "^1.2.0",
     "amqplib": "^0.5.2",
     "apollo-fetch": "^0.6.0",
     "apollo-server-express": "^1.2.0",

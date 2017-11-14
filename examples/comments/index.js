@@ -1,18 +1,20 @@
+// Config
 const brokerURI = 'tcp://127.0.0.1:55555'
+const baseURL = 'http://localhost:4002'
 
 // Our service
 const start = async () => {
   // GraphQL server
-  const { Server } = require('@rabbotio/rainbow')
+  const { GraphQLServer } = require('@rabbotio/rainbow')
   const schema = require('./schemas')
-  const server = new Server({ schema, port: 4002 })
-  await server.start()
+  const graphQLServer = new GraphQLServer({ schema, baseURL })
+  await graphQLServer.start()
 
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
   const worker = new Worker({
     service: 'comments',
-    graphqlURI: 'http://localhost:4002/graphql',
+    graphqlURI: `${baseURL}/graphql`,
     brokerURI
   })
   worker.start()

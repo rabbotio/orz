@@ -2,6 +2,7 @@ require('dotenv/config')
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const config = {
+  logger: debug,
   isProd: function get () {
     return process.env.NODE_ENV === 'production'
   },

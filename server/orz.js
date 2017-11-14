@@ -1,19 +1,23 @@
-let app
-let server
-let mongoose
+let _server
+let _mongoose
+
 module.exports = {
   start: async config => {
-    // Init
-    app = require('./express')()
+    // logger
+    this.logger = config.logger || console
 
     // Mongoose
-    mongoose = await require('./model')(config).catch(err => debug.error(`MongoDB :`, err))
+    _mongoose = await require('./model')(config).catch(err => this.logger.error(`MongoDB :`, err))
+
+    // Init
+    _server = await require('./express')(config)
+    const { app } = _server
 
     // OAuth
     await require('./oauth').init(app, config)
 
     // Server
-    server = await require('./express/server')(app, config)
+    await _server.start()
 
     // Route
     require('./routes')(app, config)
@@ -23,15 +27,17 @@ module.exports = {
 
     // Ready
     const { version } = require('./package.json')
-    debug.info(`ORZ     : v${version} (${process.env.NODE_ENV}) is ready, enjoy! 🚀`) // eslint-disable-line
+    this.logger.info(`ORZ      : v${version} (${process.env.NODE_ENV}) is ready, enjoy! 🚀`) // eslint-disable-line
     return true
   },
   stop: async () => {
-    await mongoose.disconnect()
-    debug.info(`MongoDB : bye!`)
+    await _mongoose.disconnect()
+    _mongoose = null
+    this.logger.info(`MongoDB  : bye!`)
 
-    await server.close()
-    debug.info(`ORZ     : bye!`)
+    await _server.stop()
+    _server = null
+    this.logger.info(`ORZ      : bye!`)
 
     return true
   }

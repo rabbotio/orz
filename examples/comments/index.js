@@ -13,7 +13,7 @@ const start = async () => {
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
   const worker = new Worker(brokerURI, 'comments')
-  worker.withGraphQL(`${baseURL}/graphql`)
+  worker.initGraphQL(`${baseURL}/graphql`)
   await worker.start()
 }
 

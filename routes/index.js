@@ -1,4 +1,4 @@
-module.exports = (app, { port }) => {
+module.exports = app => {
   // Oauth Route
   require('../oauth').route(app)
 }

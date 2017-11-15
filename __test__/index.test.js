@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 require('../pre')
 
 describe('authenticate()', () => {
@@ -5,12 +7,16 @@ describe('authenticate()', () => {
     // Helper
     const qs = require('qs')
 
+    // Config
+    const config = require('./config')
+
     // Server
-    const orz = require('../orz')
-    await orz.start(require('./config'))
+    const Orz = require('../orz')
+    const orz = new Orz(config)
+    await orz.start()
 
     // Config
-    const { baseURL } = require('./config')
+    const { baseURL } = config
     const oauth_authorize_url = `${baseURL}/oauth/authorize/`
 
     const queryCode = qs.stringify({

@@ -1,4 +1,4 @@
-const init = async ({ mongodbURI }) => {
+const init = async mongodbURI => {
   if (!mongodbURI) return
 
   console.info(`MongoDB  : ${mongodbURI}`)

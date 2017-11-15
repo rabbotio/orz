@@ -14,11 +14,17 @@ Content ---[query/mutation]---> Broker ---> Worker
 
 ## Run
 ```
-# Config
+# Config, copy and mod to suite your need
 cp .env.example .env
 
 # Start broker
-cd server && yarn install && yarn start
+yarn install && yarn start
+```
+
+## Optional
+```
+# Start mongo
+yarn run mongo
 ```
 
 ## Examples

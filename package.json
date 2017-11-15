@@ -1,13 +1,36 @@
 {
+  "name": "orz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "katopz",
+  "license": "MIT",
   "scripts": {
-    "update-server": "cd server && ncu -u -a && npm i",
+    "start": "nodemon index.js",
+    "mongo": "docker run --name mongo -p 27017:27017 -d mongo:3.4 2>/dev/null || docker start mongo 2>/dev/null && docker ps",
+    "test": "jest",
+    "test-watch": "jest --watchAll",
+    "update": "ncu -u -a && npm i",
     "update3": "cd examples/comments && ncu -u -a && npm i",
     "update2": "cd examples/achievements && ncu -u -a && npm i",
     "update1": "cd examples/notifications && ncu -u -a && npm i",
-    "update": "npm run update-server && npm run update1 && npm run update2 && npm run update3",
-    "start-server": "cd server && npm start",
+    "update-all": "npm run update-server && npm run update1 && npm run update2 && npm run update3",
     "start3": "cd examples/comments && npm start",
     "start2": "cd examples/achievements && npm start",
     "start1": "cd examples/notifications && npm start"
+  },
+  "dependencies": {
+    "@rabbotio/noconsole": "^1.0.1",
+    "@rabbotio/rainbow": "^1.4.1",
+    "dotenv": "^4.0.0",
+    "express-oauth-server": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "kgo": "^4.0.3",
+    "mongoose": "^4.13.2",
+    "node-uuid": "^1.4.8",
+    "qs": "^6.5.1"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "nodemon": "^1.12.1"
   }
 }

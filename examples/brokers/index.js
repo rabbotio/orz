@@ -1,5 +1,5 @@
 const start = async () => {
-  const brokerURI = 'tcp://127.0.0.1:9000'
+  const brokerURI = 'tcp://0.0.0.0:9000'
 
   const { Broker } = require('@rabbotio/rainbow')
   const broker = new Broker(brokerURI)

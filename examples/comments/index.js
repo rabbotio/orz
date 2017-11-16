@@ -1,5 +1,5 @@
 // Config
-const brokerURI = 'tcp://127.0.0.1:9000'
+const brokerURI = 'tcp://0.0.0.0:9000'
 const baseURL = 'http://localhost:4002'
 
 // Our service
@@ -20,21 +20,17 @@ const start = async () => {
 }
 
 // Other service
-const setAchievement = async () => {
+const initAchievement = async () => {
   const { Client } = require('@rabbotio/rainbow')
   const client = new Client(brokerURI, 'achievements')
-  await client.start()
-
-  return client.fetch({ query: `mutation { setAchievement(value: "ok") }` }).then(console.log).catch(console.error)
+  return client.start()
 }
 
 // And other service
-const setNotification = async () => {
+const initNotification = async () => {
   const { Client } = require('@rabbotio/rainbow')
   const client = new Client(brokerURI, 'notifications')
-  await client.start()
-
-  return client.fetch({ query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
+  return client.start()
 }
 
 const initAndFetch = async () => {
@@ -42,13 +38,17 @@ const initAndFetch = async () => {
   await init()
   await start()
 
+  // init others service
+  const achievement = await initAchievement()
+  const notification = await initNotification()
+
   setInterval(
     // Every 3 sec.
     async () => {
       // And we'll try to set achievements
-      await setAchievement()
+      await achievement.fetch({ query: `mutation { setAchievement(value: "ok") }` }).then(console.log).catch(console.error)
       // Then notify
-      await setNotification()
+      await notification.fetch({ query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
     },
     3000
   )

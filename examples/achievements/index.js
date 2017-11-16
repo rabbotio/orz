@@ -2,7 +2,7 @@ const start = async () => {
   // Config
   const serviceName = 'achievements'
   const baseURL = 'http://localhost:4003'
-  const brokerURI = 'tcp://127.0.0.1:9000'
+  const brokerURI = 'tcp://0.0.0.0:9000'
   const graphqlURI = `${baseURL}/graphql`
 
   // GraphQL server

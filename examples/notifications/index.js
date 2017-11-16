@@ -2,7 +2,7 @@ const start = async () => {
   // Config
   const serviceName = 'notifications'
   const baseURL = 'http://localhost:4004'
-  const brokerURI = 'tcp://127.0.0.1:55555'
+  const brokerURI = 'tcp://127.0.0.1:9000'
   const graphqlURI = `${baseURL}/graphql`
 
   // GraphQL server

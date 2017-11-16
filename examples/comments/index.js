@@ -1,5 +1,5 @@
 // Config
-const brokerURI = 'tcp://127.0.0.1:55555'
+const brokerURI = 'tcp://127.0.0.1:9000'
 const baseURL = 'http://localhost:4002'
 
 // Our service

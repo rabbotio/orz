@@ -8,7 +8,7 @@ const config = {
   secret: process.env.SECRET,
   mongodbURI: process.env.MONGODB_URI, // || 'mongodb://mongo/graphql',
   baseURL: process.env.BASE_URL || 'http://localhost:3030',
-  brokerURI: process.env.BROKER_URI || 'tcp://127.0.0.1:55555'
+  brokerURI: process.env.BROKER_URI || 'tcp://127.0.0.1:9000'
 }
 
 module.exports = config

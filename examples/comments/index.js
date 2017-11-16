@@ -3,18 +3,20 @@ const brokerURI = 'tcp://127.0.0.1:9000'
 const baseURL = 'http://localhost:4002'
 
 // Our service
-const start = async () => {
+const init = async () => {
   // GraphQL server
   const { GraphQLServer } = require('@rabbotio/rainbow')
   const schema = require('./schemas')
   const graphQLServer = new GraphQLServer(baseURL, schema)
-  await graphQLServer.start()
+  return graphQLServer.start().catch(console.error)
+}
 
+const start = async () => {
   // Worker
   const { Worker } = require('@rabbotio/rainbow')
   const worker = new Worker(brokerURI, 'comments')
   worker.initGraphQL(`${baseURL}/graphql`)
-  await worker.start()
+  return worker.start().catch(console.error)
 }
 
 // Other service
@@ -35,9 +37,21 @@ const setNotification = async () => {
   return client.fetch({ query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
 }
 
-// We'll start our service...
-start()
-  // And we'll try to set achievements
-  .then(setAchievement)
-  // Then notify
-  .then(setNotification)
+const initAndFetch = async () => {
+  // We'll init our service
+  await init()
+  await start()
+
+  setInterval(
+    // Every 3 sec.
+    async () => {
+      // And we'll try to set achievements
+      await setAchievement()
+      // Then notify
+      await setNotification()
+    },
+    3000
+  )
+}
+
+initAndFetch()

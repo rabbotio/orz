@@ -21,7 +21,7 @@ class Orz {
       const { Broker } = require('@rabbotio/rainbow')
       const broker = new Broker(brokerURI)
       broker.start()
-      console.info(`Broker    : ${brokerURI}`)
+      console.info(`Broker   : ${brokerURI}`)
     }
 
     // Route

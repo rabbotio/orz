@@ -27,14 +27,13 @@ describe('authenticate()', () => {
     })
 
     // #1 : redirect_uri -> code
-
     const result = await fetch(`${oauth_authorize_url}?${queryCode}`)
     const json = await result.json()
 
     expect(json).toMatchObject({
-      redirectUri: expect.stringMatching(new RegExp(String.raw`http:\/\/localhost:3030\/\?scope=profile&expires_in=3600&code=`)),
+      redirectUri: expect.stringMatching(new RegExp(String.raw`http:\/\/localhost:6060\/\?scope=profile&expires_in=3600&code=`)),
       state: {
-        redirect_uri: 'http://localhost:3030',
+        redirect_uri: config.baseURL,
         response_type: 'code',
         client_id: '1',
         scope: ['profile']

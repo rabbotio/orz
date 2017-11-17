@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
-    "@rabbotio/rainbow": "^1.6.0",
+    "@rabbotio/rainbow": "^1.6.1",
     "graphql": "^0.11.7"
   },
   "devDependencies": {

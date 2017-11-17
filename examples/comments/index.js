@@ -1,6 +1,7 @@
 // Config
 const brokerURI = 'tcp://0.0.0.0:9000'
 const baseURL = 'http://localhost:4002'
+const secret = 'good morning teacher sit down'
 
 // Our service
 const init = async () => {
@@ -8,7 +9,7 @@ const init = async () => {
   const { GraphQLServer } = require('@rabbotio/rainbow')
   const schema = require('./schemas')
   const graphQLServer = new GraphQLServer(baseURL, schema)
-  return graphQLServer.start().catch(console.error)
+  return graphQLServer.start()
 }
 
 const start = async () => {
@@ -16,20 +17,13 @@ const start = async () => {
   const { Worker } = require('@rabbotio/rainbow')
   const worker = new Worker(brokerURI, 'comments')
   worker.initGraphQL(`${baseURL}/graphql`)
-  return worker.start().catch(console.error)
+  return worker.start()
 }
 
 // Other service
-const initAchievement = async () => {
+const initClient = async () => {
   const { Client } = require('@rabbotio/rainbow')
-  const client = new Client(brokerURI, 'achievements')
-  return client.start()
-}
-
-// And other service
-const initNotification = async () => {
-  const { Client } = require('@rabbotio/rainbow')
-  const client = new Client(brokerURI, 'notifications')
+  const client = new Client(brokerURI, { secret })
   return client.start()
 }
 
@@ -38,17 +32,16 @@ const initAndFetch = async () => {
   await init()
   await start()
 
-  // init others service
-  const achievement = await initAchievement()
-  const notification = await initNotification()
+  // Then init client
+  const client = await initClient()
 
   setInterval(
     // Every 3 sec.
     async () => {
       // And we'll try to set achievements
-      await achievement.fetch({ query: `mutation { setAchievement(value: "ok") }` }).then(console.log).catch(console.error)
+      await client.fetch('achievements', { query: `mutation { setAchievement(value: "ok") }` }).then(console.log).catch(console.error)
       // Then notify
-      await notification.fetch({ query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
+      await client.fetch('notifications', { query: `mutation { setNotification(value: "ok") }` }).then(console.log).catch(console.error)
     },
     3000
   )

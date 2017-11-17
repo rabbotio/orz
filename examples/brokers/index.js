@@ -3,7 +3,7 @@ const start = async () => {
 
   const { Broker } = require('@rabbotio/rainbow')
   const broker = new Broker(brokerURI)
-  return broker.start().catch(console.error)
+  return broker.start()
 }
 
-start()
+start().catch(console.error)

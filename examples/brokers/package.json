@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "dependencies": {
-    "@rabbotio/rainbow": "^1.4.3"
+    "@rabbotio/rainbow": "^1.6.0"
   },
   "devDependencies": {
     "jest": "^21.2.1",

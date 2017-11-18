@@ -5,7 +5,7 @@
   "author": "katopz",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "npm run start",
     "mongo": "docker run --name mongo -p 27017:27017 -d mongo:3.4 2>/dev/null || docker start mongo 2>/dev/null && docker ps",
     "test": "jest",
     "test-watch": "jest --watchAll",
@@ -13,12 +13,12 @@
     "update3": "cd examples/comments && ncu -u -a && npm i",
     "update2": "cd examples/achievements && ncu -u -a && npm i",
     "update1": "cd examples/notifications && ncu -u -a && npm i",
-    "update0": "cd examples/brokers && ncu -u -a && npm i",
+    "update0": "cd examples/orz-rainbow && ncu -u -a && npm i",
     "update-all": "npm run update && npm run update0 && npm run update1 && npm run update2 && npm run update3",
     "start3": "cd examples/comments && npm start",
     "start2": "cd examples/achievements && npm start",
     "start1": "cd examples/notifications && npm start",
-    "start0": "cd examples/brokers && npm start"
+    "start0": "cd examples/orz-rainbow && npm start"
   },
   "dependencies": {
     "@rabbotio/noconsole": "^1.0.1",
@@ -29,7 +29,8 @@
     "kgo": "^4.0.3",
     "mongoose": "^4.13.3",
     "node-uuid": "^1.4.8",
-    "qs": "^6.5.1"
+    "qs": "^6.5.1",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "jest": "^21.2.1",

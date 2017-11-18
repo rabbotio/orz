@@ -1,5 +1,5 @@
 # orz
-- Oauth Router on ZeroMQ
+- Oauth on Rainbow via ZeroMQ
 - Support RPC
 - Support GraphQL+RPC
 - Support service discovery

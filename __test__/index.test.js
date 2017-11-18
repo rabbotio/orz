@@ -3,7 +3,7 @@
 require('../pre')
 
 describe('authenticate()', () => {
-  it('should authorize and return tokens', async () => {
+  it('should authorize and return tokens', async done => {
     // Helper
     const qs = require('qs')
 
@@ -12,7 +12,8 @@ describe('authenticate()', () => {
 
     // Server
     const Orz = require('../orz')
-    const orz = new Orz(config)
+    const orz = new Orz()
+    await orz.init(config)
     await orz.start()
 
     // Config
@@ -70,5 +71,6 @@ describe('authenticate()', () => {
     })
 
     await orz.stop()
+    done()
   })
 })

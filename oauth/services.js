@@ -1,4 +1,4 @@
-const uuid = require('node-uuid')
+const uuidv4 = require('uuid/v4')
 const authCodes = {}
 const accessTokens = {}
 const clients = {
@@ -20,10 +20,10 @@ module.exports = {
   },
   tokenService: {
     generateToken: function (callback) {
-      callback(null, uuid.v4())
+      callback(null, uuidv4())
     },
     generateAuthorizationCode: function (callback) {
-      callback(null, uuid.v4())
+      callback(null, uuidv4())
     }
   },
   authorizationService: {

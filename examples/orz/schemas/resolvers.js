@@ -1,11 +1,11 @@
-let _comments = []
+let _users = []
 
 const resolvers = {
   Query: {
-    getComments: (root, _, context) => _comments.join(',')
+    getUsers: (root, _, context) => _users.join(',')
   },
   Mutation: {
-    setComment: (_, { bar }, context) => _comments.push(bar)
+    setUser: (_, { bar }, context) => _users.push(bar) && bar
   }
 }
 
